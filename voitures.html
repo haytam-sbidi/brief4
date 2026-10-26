@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AutoPark — Interface de gestion du parc automobile Atlas Auto."
+    />
+    <title>Gestion du parc · AutoPark</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/voitures.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <header class="site-header">
+      <div class="container header-content">
+        <a
+          class="brand"
+          href="voitures.html"
+          aria-label="AutoPark — Gestion du parc"
+        >
+          <span class="brand-mark" aria-hidden="true">A<span>.</span></span>
+          <span>AutoPark<small>ATLAS AUTO</small></span>
+        </a>
+        <nav aria-label="Navigation principale">
+          <!-- index.html est le dashboard à créer par l'apprenant. -->
+          <a href="index.html">Dashboard</a>
+          <a href="voitures.html" aria-current="page">Gestion du parc</a>
+        </nav>
+        <span class="agency-label">Agence de location</span>
+      </div>
+    </header>
+
+    <main id="contenu" class="container main-content">
+      <section class="page-intro" aria-labelledby="titre-page">
+        <p class="eyebrow">VOTRE ESPACE DE GESTION</p>
+        <h1 id="titre-page">Gestion du parc automobile</h1>
+        <p>Centralisez vos véhicules, leurs tarifs et leur disponibilité.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="titre-formulaire">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / VÉHICULE</p>
+            <h2 id="titre-formulaire">Ajouter une voiture</h2>
+          </div>
+          <span class="section-note"
+            >Les champs marqués * sont obligatoires.</span
+          >
+        </div>
+        <!-- TODO JS : gérer submit, valider, ajouter ou modifier une voiture. -->
+        <form id="formulaire-voiture" novalidate>
+          <input type="hidden" id="voiture-id" name="id" value="" />
+          <div class="form-grid">
+            <div class="field">
+              <label for="marque"
+                >Marque <span aria-hidden="true">*</span></label
+              >
+              <input
+                id="marque"
+                name="marque"
+                type="text"
+                placeholder="Ex. : Dacia"
+                required
+                aria-describedby="erreur-marque"
+              />
+              <small id="erreur-marque" class="field-error"></small>
+            </div>
+            <div class="field">
+              <label for="modele"
+                >Modèle <span aria-hidden="true">*</span></label
+              >
+              <input
+                id="modele"
+                name="modele"
+                type="text"
+                placeholder="Ex. : Sandero"
+                required
+                aria-describedby="erreur-modele"
+              />
+              <small id="erreur-modele" class="field-error"></small>
+            </div>
+            <div class="field">
+              <label for="immatriculation"
+                >Immatriculation <span aria-hidden="true">*</span></label
+              >
+              <input
+                id="immatriculation"
+                name="immatriculation"
+                type="text"
+                placeholder="Ex. : AUTO-007"
+                required
+                aria-describedby="aide-immatriculation erreur-immatriculation"
+              />
+              <small id="aide-immatriculation" class="field-help"
+                >Utilisez une immatriculation fictive et unique.</small
+              >
+              <small id="erreur-immatriculation" class="field-error"></small>
+            </div>
+            <div class="field">
+              <label for="categorie"
+                >Catégorie <span aria-hidden="true">*</span></label
+              >
+              <select
+                id="categorie"
+                name="categorie"
+                required
+                aria-describedby="erreur-categorie"
+              >
+                <option value="">Choisir une catégorie</option>
+                <option value="Citadine">Citadine</option>
+                <option value="Berline">Berline</option>
+                <option value="SUV">SUV</option>
+              </select>
+              <small id="erreur-categorie" class="field-error"></small>
+            </div>
+            <div class="field">
+              <label for="prix-jour"
+                >Prix par jour (DH) <span aria-hidden="true">*</span></label
+              >
+              <input
+                id="prix-jour"
+                name="prixJour"
+                type="number"
+                min="0.01"
+                step="0.01"
+                placeholder="Ex. : 250"
+                required
+                aria-describedby="erreur-prix-jour"
+              />
+              <small id="erreur-prix-jour" class="field-error"></small>
+            </div>
+            <div class="field">
+              <label for="statut"
+                >Statut <span aria-hidden="true">*</span></label
+              >
+              <select
+                id="statut"
+                name="statut"
+                required
+                aria-describedby="erreur-statut"
+              >
+                <option value="Disponible">Disponible</option>
+                <option value="Louée">Louée</option>
+                <option value="En maintenance">En maintenance</option>
+              </select>
+              <small id="erreur-statut" class="field-error"></small>
+            </div>
+          </div>
+          <div class="form-footer">
+            <p
+              id="message-formulaire"
+              class="feedback"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <div class="form-actions">
+              <!-- Retirer hidden en JavaScript pendant une modification. -->
+              <button
+                id="annuler-modification"
+                class="button button-secondary"
+                type="button"
+                hidden
+              >
+                Annuler la modification
+              </button>
+              <button
+                id="bouton-enregistrer"
+                class="button button-primary"
+                type="submit"
+              >
+                Ajouter la voiture
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel inventory-panel" aria-labelledby="titre-inventaire">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / INVENTAIRE</p>
+            <h2 id="titre-inventaire">Les voitures du parc</h2>
+          </div>
+          <span class="section-note">Tarifs exprimés en dirhams</span>
+        </div>
+        <!-- TODO JS : combiner recherche, filtres et tri. -->
+        <div class="toolbar">
+          <div class="field search-field">
+            <label for="recherche">Rechercher une voiture</label>
+            <input
+              id="recherche"
+              type="search"
+              placeholder="Marque, modèle, immatriculation…"
+            />
+          </div>
+          <div class="field">
+            <label for="filtre-statut">Statut</label>
+            <select id="filtre-statut">
+              <option value="">Tous les statuts</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Louée">Louée</option>
+              <option value="En maintenance">En maintenance</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filtre-categorie">Catégorie</label>
+            <select id="filtre-categorie">
+              <option value="">Toutes les catégories</option>
+              <option value="Citadine">Citadine</option>
+              <option value="Berline">Berline</option>
+              <option value="SUV">SUV</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tri-prix">Trier par</label>
+            <select id="tri-prix">
+              <option value="">Ordre initial</option>
+              <option value="croissant">Prix croissant</option>
+              <option value="decroissant">Prix décroissant</option>
+            </select>
+          </div>
+          <button
+            id="reinitialiser-filtres"
+            type="button"
+            class="button button-secondary"
+          >
+            Réinitialiser
+          </button>
+        </div>
+        <p
+          id="message-parc"
+          class="feedback inventory-feedback"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <div
+          class="table-scroll"
+          role="region"
+          aria-label="Tableau des voitures : défilement horizontal possible"
+          tabindex="0"
+        >
+          <table>
+            <caption class="sr-only">
+              Liste des voitures du parc et actions de gestion
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Marque</th>
+                <th scope="col">Modèle</th>
+                <th scope="col">Immatriculation</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Prix / jour</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <!-- Lignes de démonstration statiques : à remplacer par un affichage JS.
+               data-id identifie la voiture ; data-action indique l'action. -->
+            <tbody id="liste-voitures">
+              <tr>
+                <td><strong>Dacia</strong></td>
+                <td>Sandero</td>
+                <td><span class="registration">AUTO-001</span></td>
+                <td>Citadine</td>
+                <td class="price">250 <span>DH / jour</span></td>
+                <td><span class="badge badge-disponible">Disponible</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="button button-edit"
+                      data-action="modifier"
+                      data-id="1"
+                      aria-label="Modifier Dacia Sandero, AUTO-001"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      class="button button-delete"
+                      data-action="supprimer"
+                      data-id="1"
+                      aria-label="Supprimer Dacia Sandero, AUTO-001"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Renault</strong></td>
+                <td>Mégane</td>
+                <td><span class="registration">AUTO-002</span></td>
+                <td>Berline</td>
+                <td class="price">380 <span>DH / jour</span></td>
+                <td><span class="badge badge-louee">Louée</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="button button-edit"
+                      data-action="modifier"
+                      data-id="2"
+                      aria-label="Modifier Renault Mégane, AUTO-002"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      class="button button-delete"
+                      data-action="supprimer"
+                      data-id="2"
+                      aria-label="Supprimer Renault Mégane, AUTO-002"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Hyundai</strong></td>
+                <td>Tucson</td>
+                <td><span class="registration">AUTO-003</span></td>
+                <td>SUV</td>
+                <td class="price">550 <span>DH / jour</span></td>
+                <td>
+                  <span class="badge badge-maintenance">En maintenance</span>
+                </td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="button button-edit"
+                      data-action="modifier"
+                      data-id="3"
+                      aria-label="Modifier Hyundai Tucson, AUTO-003"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      class="button button-delete"
+                      data-action="supprimer"
+                      data-id="3"
+                      aria-label="Supprimer Hyundai Tucson, AUTO-003"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Peugeot</strong></td>
+                <td>208</td>
+                <td><span class="registration">AUTO-004</span></td>
+                <td>Citadine</td>
+                <td class="price">280 <span>DH / jour</span></td>
+                <td><span class="badge badge-disponible">Disponible</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="button button-edit"
+                      data-action="modifier"
+                      data-id="4"
+                      aria-label="Modifier Peugeot 208, AUTO-004"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      class="button button-delete"
+                      data-action="supprimer"
+                      data-id="4"
+                      aria-label="Supprimer Peugeot 208, AUTO-004"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Toyota</strong></td>
+                <td>Corolla</td>
+                <td><span class="registration">AUTO-005</span></td>
+                <td>Berline</td>
+                <td class="price">420 <span>DH / jour</span></td>
+                <td><span class="badge badge-louee">Louée</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="button button-edit"
+                      data-action="modifier"
+                      data-id="5"
+                      aria-label="Modifier Toyota Corolla, AUTO-005"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      class="button button-delete"
+                      data-action="supprimer"
+                      data-id="5"
+                      aria-label="Supprimer Toyota Corolla, AUTO-005"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Dacia</strong></td>
+                <td>Duster</td>
+                <td><span class="registration">AUTO-006</span></td>
+                <td>SUV</td>
+                <td class="price">450 <span>DH / jour</span></td>
+                <td><span class="badge badge-disponible">Disponible</span></td>
+                <td>
+                  <div class="row-actions">
+                    <button
+                      type="button"
+                      class="button button-edit"
+                      data-action="modifier"
+                      data-id="6"
+                      aria-label="Modifier Dacia Duster, AUTO-006"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      class="button button-delete"
+                      data-action="supprimer"
+                      data-id="6"
+                      aria-label="Supprimer Dacia Duster, AUTO-006"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- TODO JS : afficher ce message si le parc ou le résultat est vide. -->
+        <div id="etat-vide" class="empty-state" hidden>
+          <h3>Aucune voiture à afficher</h3>
+          <p id="texte-etat-vide">
+            Ajoutez une voiture ou modifiez vos critères de recherche.
+          </p>
+        </div>
+        <div class="table-footer">
+          <span>Atlas Auto · Parc automobile</span
+          ><span>Disponible · Louée · En maintenance</span>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer container">
+      <span>AutoPark</span>
+      <p>Une gestion simple, un parc bien organisé.</p>
+    </footer>
+  </body>
+</html>
