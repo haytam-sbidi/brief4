@@ -1,5 +1,8 @@
 import { voituresInitiales } from "./data.js"
-let tab = voituresInitiales
+
+if(!localStorage.getItem("data")){
+    localStorage.setItem("data", JSON.stringify(voituresInitiales))
+}
 const liste = document.getElementById("liste-voitures")
 const marque = document.getElementById("marque")
 const modele = document.getElementById("modele")
@@ -9,9 +12,12 @@ const prix = document.getElementById("prix-jour")
 const statut = document.getElementById("statut")
 const btn = document.getElementById("bouton-enregistrer")
 
+let tab = JSON.parse(localStorage.getItem("data"))
+console.log(tab)
+
 let bool = false
 display()
-let id = 7
+let id = tab.length;
 function addtolist() {
     let temp = {
         "id": id,
@@ -22,10 +28,10 @@ function addtolist() {
         "prixJour": prix.value,
         "statut": statut.value
     }
-
     tab.push(temp)
     console.log(tab)
     temp = {}
+    localStorage.setItem("data", JSON.stringify(tab))
 
     id++
     marque.value = ""
@@ -95,11 +101,11 @@ btn.addEventListener("click", (e) => {
         window.alert("please fill the required field");
         return;
     }
-    if (bool == false) {
+    if (bool === false) {
         addtolist()
         display()
 
-    } else if (bool == true) {
+    } else if (bool === true) {
         savemodify(num)
         display()
         bool = false
@@ -114,6 +120,7 @@ function deletecar(a) {
             tab.splice(i, 1)
             display()
             console.log(tab)
+            localStorage.setItem("data", JSON.stringify(tab))
         }
 
     }
@@ -148,4 +155,6 @@ function savemodify(c) {
     modele.value = ""
     immatriculation.value = ""
     prix.value = ""
+
+    localStorage.setItem("data", JSON.stringify(tab))
 }
