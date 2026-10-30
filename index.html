@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="icon" href="data:," />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <!-- <script type="module" src="js/voitures.js"></script> -->
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>  
+    <header  class="bg-white border-b-[#dbe2eb]">
+      <div class="container header-content m-auto ">
+        <a
+          class="brand"
+          href="voitures.html"
+          aria-label="AutoPark — Gestion du parc"
+        >
+          <span class="brand-mark" aria-hidden="true">A<span>.</span></span>
+          <span>AutoPark<small>ATLAS AUTO</small></span>
+        </a>
+        <nav aria-label="Navigation principale">
+          <!-- index.html est le dashboard à créer par l'apprenant. -->
+          <a href="index.html" aria-current="page">Dashboard</a>
+          <a href="voitures.html" >Gestion du parc</a>
+        </nav>
+        <span class="agency-label">Agence de location</span>
+      </div>
+    </header>
+
+    <main>
+        <section>
+            <div>
+                <p>Total</p>
+                <p></p>
+            </div>
+            <div>
+                <p>Disponible</p>
+                <p></p>
+            </div>
+            <div>
+                <p>Louée</p>
+                <p></p>
+            </div>
+            <div>
+                <p>En maintenance</p>
+                <p></p>
+            </div>
+        </section>
+        <section>
+            <div
+          class="table-scroll"
+          role="region"
+          aria-label="Tableau des voitures : défilement horizontal possible"
+          tabindex="0"
+        >
+          <table>
+            <caption class="sr-only">
+              Liste des voitures du parc et actions de gestion
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Marque</th>
+                <th scope="col">Modèle</th>
+                <th scope="col">Immatriculation</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Prix / jour</th>
+                <th scope="col">Statut</th>
+              </tr>
+            </thead>
+            <tbody id="liste-voitures">
+              <tr>
+                <td><strong>Dacia</strong></td>
+                <td>Sandero</td>
+                <td><span class="registration">AUTO-001</span></td>
+                <td>Citadine</td>
+                <td class="price">250 <span>DH / jour</span></td>
+                <td><span class="badge badge-disponible">Disponible</span></td>
+              </tr>
+              <tr>
+                <td><strong>Renault</strong></td>
+                <td>Mégane</td>
+                <td><span class="registration">AUTO-002</span></td>
+                <td>Berline</td>
+                <td class="price">380 <span>DH / jour</span></td>
+                <td><span class="badge badge-louee">Louée</span></td>
+              </tr>
+              <tr>
+                <td><strong>Hyundai</strong></td>
+                <td>Tucson</td>
+                <td><span class="registration">AUTO-003</span></td>
+                <td>SUV</td>
+                <td class="price">550 <span>DH / jour</span></td>
+                <td>
+                  <span class="badge badge-maintenance">En maintenance</span>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Peugeot</strong></td>
+                <td>208</td>
+                <td><span class="registration">AUTO-004</span></td>
+                <td>Citadine</td>
+                <td class="price">280 <span>DH / jour</span></td>
+                <td><span class="badge badge-disponible">Disponible</span></td>
+              </tr>
+              <tr>
+                <td><strong>Toyota</strong></td>
+                <td>Corolla</td>
+                <td><span class="registration">AUTO-005</span></td>
+                <td>Berline</td>
+                <td class="price">420 <span>DH / jour</span></td>
+                <td><span class="badge badge-louee">Louée</span></td>
+              </tr>
+              <tr>
+                <td><strong>Dacia</strong></td>
+                <td>Duster</td>
+                <td><span class="registration">AUTO-006</span></td>
+                <td>SUV</td>
+                <td class="price">450 <span>DH / jour</span></td>
+                <td><span class="badge badge-disponible">Disponible</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </section>
+    </main>
+</body>
+</html>
