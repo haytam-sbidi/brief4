@@ -1,6 +1,6 @@
 import { voituresInitiales } from "./data.js"
 
-if(!localStorage.getItem("data")){
+if (!localStorage.getItem("data")) {
     localStorage.setItem("data", JSON.stringify(voituresInitiales))
 }
 const liste = document.getElementById("liste-voitures")
@@ -11,13 +11,19 @@ const categorie = document.getElementById("categorie")
 const prix = document.getElementById("prix-jour")
 const statut = document.getElementById("statut")
 const btn = document.getElementById("bouton-enregistrer")
+const searchbar = document.getElementById("recherche")
+const filtrestatut = document.getElementById("filtre-statut")
+const filtrecategorie = document.getElementById("filtre-categorie")
+const triprix = document.getElementById("tri-prix")
+const resetbut = document.getElementById("reinitialiser-filtres")
+const cancel = document.getElementById("annuler-modification")
 
 let tab = JSON.parse(localStorage.getItem("data"))
 console.log(tab)
 
 let bool = false
-display()
-let id = tab.length;
+display(tab)
+let id = tab.length + 1;
 function addtolist() {
     let temp = {
         "id": id,
@@ -38,12 +44,13 @@ function addtolist() {
     modele.value = ""
     immatriculation.value = ""
     prix.value = ""
-    display()
+    categorie.value = ""
+    display(tab)
 }
 
-function display() {
+function display(arr) {
     liste.textContent = ""
-    for (let i = 0; i < tab.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
 
         const tr = document.createElement("tr")
         const td1 = document.createElement("td")
@@ -55,6 +62,7 @@ function display() {
         const td5 = document.createElement("td")
         const span2 = document.createElement("span")
         const td6 = document.createElement("td")
+        const span3 = document.createElement("span")
         const td7 = document.createElement("td")
         const div = document.createElement("div")
         const btn1 = document.createElement("button")
@@ -62,25 +70,33 @@ function display() {
 
         span1.setAttribute("class", "registration")
         td5.setAttribute("class", "price")
-        span2.setAttribute("class", "badge badge-disponible")
+
+        if(arr[i].statut=="Disponible"){
+            span3.setAttribute("class","badge badge-disponible")
+        }else if(arr[i].statut=="Louée"){
+            span3.setAttribute("class","badge badge-louee")
+        }else if(arr[i].statut=="En maintenance"){
+            span3.setAttribute("class","badge badge-maintenance")
+        }
+
         div.setAttribute("class", "row-actions")
         btn1.setAttribute("class", "button button-edit")
         btn1.addEventListener("click", (e) => {
             e.preventDefault()
-            modifycar(tab[i].id)
+            modifycar(arr[i].id)
         })
         btn2.setAttribute("class", "button button-delete")
         btn2.addEventListener("click", (e) => {
             e.preventDefault()
-            deletecar(tab[i].id)
+            deletecar(arr[i].id)
         })
 
-        strong.textContent = tab[i].marque
-        td2.textContent = tab[i].modele
-        span1.textContent = tab[i].immatriculation
-        td4.textContent = tab[i].categorie
-        span2.textContent = tab[i].prixJour
-        td6.textContent = tab[i].statut
+        strong.textContent = arr[i].marque
+        td2.textContent = arr[i].modele
+        span1.textContent = arr[i].immatriculation
+        td4.textContent = arr[i].categorie
+        span2.textContent = arr[i].prixJour +"DH / jour"
+        span3.textContent = arr[i].statut
         btn1.textContent = "Modifier"
         btn2.textContent = "Supprimer"
 
@@ -89,6 +105,7 @@ function display() {
         td1.append(strong)
         td3.append(span1)
         td5.append(span2)
+        td6.append(span3)
         tr.append(td1, td2, td3, td4, td5, td6, td7)
         liste.append(tr)
 
@@ -103,11 +120,11 @@ btn.addEventListener("click", (e) => {
     }
     if (bool === false) {
         addtolist()
-        display()
+        display(tab)
 
     } else if (bool === true) {
         savemodify(num)
-        display()
+        display(tab)
         bool = false
     }
     console.log(tab)
@@ -118,7 +135,7 @@ function deletecar(a) {
     for (let i = 0; i <= tab.length - 1; i++) {
         if (tab[i].id == a) {
             tab.splice(i, 1)
-            display()
+            display(tab)
             console.log(tab)
             localStorage.setItem("data", JSON.stringify(tab))
         }
@@ -139,8 +156,9 @@ function modifycar(b) {
             statut.value = tab[i].statut
             num = i
         }
-
     }
+    cancel.removeAttribute("hidden")
+    btn.textContent="Modifier voiture"
 }
 
 function savemodify(c) {
@@ -158,3 +176,89 @@ function savemodify(c) {
 
     localStorage.setItem("data", JSON.stringify(tab))
 }
+
+function cancelmodify(){
+    marque.value = ""
+    modele.value = ""
+    immatriculation.value = ""
+    prix.value = ""
+    categorie.value = ""
+    bool=false
+}
+
+cancel.addEventListener("click",cancelmodify
+)
+
+function precisedisplay() {
+    let searchvalue = searchbar.value.toLowerCase().trim()
+    let searchresult = tab.filter(item => item.marque.toLowerCase().includes(searchvalue)
+        || item.modele.toLowerCase().includes(searchvalue)
+        || item.immatriculation.toLowerCase().includes(searchvalue))
+
+    if (filtrestatut.value != "") {
+        searchresult = searchresult.filter(item => item.statut == filtrestatut.value)
+    }
+
+    if (filtrecategorie.value != "") {
+        searchresult = searchresult.filter(item => item.categorie == filtrecategorie.value)
+    }
+
+    if (triprix.value == "") {
+        display(searchresult)
+    }
+
+    let triresult = searchresult
+
+    if (triprix.value == "croissant") {
+        increasingly(triresult)
+    }
+
+    if (triprix.value == "decroissant") {
+        decreasingly(triresult)
+    }
+
+    display(searchresult)
+}
+
+function reset() {
+    searchbar.value = ""
+    filtrecategorie.value = ""
+    filtrestatut.value = ""
+    searchbar.value = ""
+    triprix.value = ""
+    display(tab)
+}
+
+function decreasingly(arr) {
+    for (let i = 0; i < arr.length-1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            let temp
+            if (arr[i].prixJour < arr[j].prixJour) {
+                temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+            }
+        }
+    }
+    return arr
+}
+
+function increasingly(arr) {
+    for (let i = 0; i < arr.length-1; i++) {
+        for (let j = i + 1; j < arr.length ; j++) {
+            let temp
+            if (arr[i].prixJour > arr[j].prixJour) {
+                temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+            }
+        }
+    }
+    return arr
+}
+
+searchbar.addEventListener("input", precisedisplay)
+filtrestatut.addEventListener("change", precisedisplay)
+filtrecategorie.addEventListener("change", precisedisplay)
+resetbut.addEventListener("click", reset)
+triprix.addEventListener("change", precisedisplay)
