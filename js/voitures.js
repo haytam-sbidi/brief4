@@ -126,6 +126,7 @@ btn.addEventListener("click", (e) => {
         savemodify(num)
         display(tab)
         bool = false
+        cancel.removeAttribute("hidden")
     }
     console.log(tab)
 
