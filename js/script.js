@@ -185,7 +185,7 @@ resetbtn.addEventListener("click", () => {
 })
 
 function datesetting() {
-  if (start.value !== "" && end.value !== "") {
+  if (start.value !== "" && end.value !== "" && recup !== null) {
     period.textContent = formatdate(start) + " → " + formatdate(end)
     locationperiod(start, end)
     duree.textContent = duration + " jours"
@@ -208,6 +208,7 @@ start.addEventListener("change", () => {
   let newmil = mil + 172800000
   let actumil = new Date(newmil).toISOString().split("T")[0]
   end.setAttribute("min", `${actumil}`)
+  end.value = null
 })
 
 end.addEventListener("change", () => {
@@ -225,9 +226,9 @@ function locationperiod(debut, fin) {
 
 function calculprix(a, b) {
   prix = a * b
-  if (prix > 0) {
+  if (prix > 0 && recup != null) {
     carprice.textContent = prix + "MAD / jour"
-    let totalprix = prix
+    let totalprix = prix + recup
     total.textContent = totalprix + "MAD"
   }
 }
@@ -251,5 +252,129 @@ next1.addEventListener("click", () => {
     stepname1.classList.remove("curent-step-name")
     stepnum2.classList.add("curent-step-num")
     stepname2.classList.add("curent-step-name")
+  }
+})
+
+let modesRecuperation = [
+  { id: "agence", nom: "À l’agence", fraisFixes: 0 },
+  { id: "aeroport", nom: "À l’aéroport", fraisFixes: 150 },
+  { id: "adresse", nom: "À une adresse", fraisFixes: 100 },
+]
+
+let affichage2 = document.getElementById("affichage2")
+let recupprice = document.getElementById("prix-recuperation")
+let timeinput = document.getElementById("time-input")
+let recupinput = document.getElementById("recup-input")
+let agence = document.getElementById("agence")
+let aeroport = document.getElementById("aeroport")
+let adresse = document.getElementById("adresse")
+let return1 = document.getElementById("return1")
+let next2 = document.getElementById("next2")
+let port = document.getElementById("port")
+let vol = document.getElementById("vol")
+let arival = document.getElementById("arival")
+let city = document.getElementById("city")
+let home = document.getElementById("home")
+let delivery = document.getElementById("delivery")
+let stepnum3 = document.getElementById("stepnum3")
+let stepname3 = document.getElementById("stepname3")
+let etape3 = document.getElementById("etape3")
+
+let recup
+
+function display2() {
+  affichage2.textContent = ""
+  for (let i = 0; i < modesRecuperation.length; i++) {
+    let label1 = document.createElement("label")
+    let div1 = document.createElement("div")
+    let input1 = document.createElement("input")
+    let p1 = document.createElement("p")
+    let p2 = document.createElement("p")
+
+    div1.setAttribute("class", "choix")
+    div1.classList.add("smaller")
+    input1.setAttribute("type", "radio")
+    input1.setAttribute("name", "local")
+    p1.setAttribute("class", "car-name")
+    p2.setAttribute("class", "car-price")
+
+    p1.textContent = modesRecuperation[i].nom
+    p2.textContent = "+" + modesRecuperation[i].fraisFixes + "MAD"
+
+    input1.addEventListener("change", () => {
+      recupprice.textContent = modesRecuperation[i].fraisFixes + " MAD"
+      recup = modesRecuperation[i].fraisFixes
+      calculprix(voitures[num].prixJour, duration)
+      let choisis = document.querySelector('.choisis1')
+      if (choisis != null) {
+        choisis.classList.remove("choisis1")
+      }
+      div1.classList.add("choisis1")
+      if (recup == "0") {
+        agence.removeAttribute("hidden")
+        aeroport.setAttribute("hidden", "true")
+        adresse.setAttribute("hidden", "true")
+      } else if (recup == "150") {
+        aeroport.removeAttribute("hidden")
+        agence.setAttribute("hidden", "true")
+        adresse.setAttribute("hidden", "true")
+      } else if (recup == "100") {
+        adresse.removeAttribute("hidden")
+        aeroport.setAttribute("hidden", "true")
+        agence.setAttribute("hidden", "true")
+      }
+    })
+    div1.append(input1, p1, p2)
+    label1.append(div1)
+    affichage2.append(label1)
+  }
+}
+display2()
+
+return1.addEventListener("click", () => {
+  etape2.setAttribute("hidden", "true")
+  etape1.removeAttribute("hidden")
+  stepnum2.classList.remove("curent-step-num")
+  stepname2.classList.remove("curent-step-name")
+  stepnum1.classList.add("curent-step-num")
+  stepname1.classList.add("curent-step-name")
+})
+console.log(port.value)
+next2.addEventListener("click", () => {
+  if (recup == "0") {
+    if (timeinput.value == "") {
+      window.alert("please fill all fields")
+    } else {
+      etape2.setAttribute("hidden", "true")
+      etape3.removeAttribute("hidden")
+      stepnum2.classList.remove("curent-step-num")
+      stepname2.classList.remove("curent-step-name")
+      stepnum3.classList.add("curent-step-num")
+      stepname3.classList.add("curent-step-name")
+    }
+  } else if (recup == "150") {
+    if (port.value == "" || vol.value == "" || arival.value == "") {
+      window.alert("please fill all fields")
+    } else {
+      etape2.setAttribute("hidden", "true")
+      etape3.removeAttribute("hidden")
+      stepnum2.classList.remove("curent-step-num")
+      stepname2.classList.remove("curent-step-name")
+      stepnum3.classList.add("curent-step-num")
+      stepname3.classList.add("curent-step-name")
+    }
+  } else if (recup == "100") {
+    if (city.value == "" || home.value == "" || delivery.value == "") {
+      window.alert("please fill all fields")
+    } else {
+      etape2.setAttribute("hidden", "true")
+      etape3.removeAttribute("hidden")
+      stepnum2.classList.remove("curent-step-num")
+      stepname2.classList.remove("curent-step-name")
+      stepnum3.classList.add("curent-step-num")
+      stepname3.classList.add("curent-step-name")
+    }
+  } else {
+    window.alert("please fill all fields")
   }
 })

@@ -117,7 +117,72 @@
                         <button class="next-button" id="next1">Suivant</button>
                     </div>
                 </div>
-                
+                <div class="choix-vehicule" id="etape2" hidden>
+                    <div>
+                        <h6 class="up-title">02 / RÉCUPÉRATION</h6>
+                        <h2 class="sub-title">Où récupérer votre voiture ?</h2>
+                        <h5 class="thin">Choisissez le lieu qui vous convient.</h5>
+                    </div>
+                    <form id="form2">
+                        <div class="local" id="affichage2">
+                            <label for="local1">
+                                <div class="choix smaller">
+                                    <input type="radio" name="local" id="local1">
+                                    <p class="car-name">À l’agence</p>
+                                    <p class="car-price">Gratuit</p>
+                                </div>
+                            </label>
+                        </div>
+                        <p class="period">Informations de récupération</p>
+                        <div id="recup-input">
+                            <div id="agence" hidden>
+                                <label class="label">Heure de récupération *</label><br><br>
+                                <input type="time" class="input1" id="time-input">
+                            </div>
+                            <div id="aeroport" hidden>
+                                <label class="label">Aéroport *</label><br><br>
+                                <select id="port" class="input1">
+                                    <option value="">select Aéroport</option>
+                                    <option value="Casablanca">Casablanca — Centre-ville</option>
+                                    <option value="Rabat">Rabat — Agdal</option>
+                                    <option value="Marrakech">Marrakech — Guéliz</option>
+                                </select><br><br>
+                                <div>
+                                    <div>
+                                        <label class="label">Numéro du vol *</label><br><br>
+                                        <input type="text" class="input" id="vol">
+                                    </div>
+                                    <div>
+                                        <label class="label">Heure d’arrivée *</label><br><br>
+                                        <input type="time" name="" id="arival" class="input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="adresse" hidden>
+                                <label for="" class="label">Ville *</label><br><br>
+                                <select name="" id="city" class="input1">
+                                    <option value="">choisir une ville</option>
+                                    <option value="Casablanca">Casablanca</option>
+                                    <option value="Rabat">Rabat</option>
+                                    <option value="Marrakech">Marrakech</option>
+                                </select><br><br>
+                                <label for="" class="label">Adresse complète *</label><br><br>
+                                <input type="text" class="input1" id="home"><br><br>
+                                <label for="" class="label">Heure de livraison *</label><br><br>
+                                <input type="time" class="input1" id="delivery">
+                            </div>
+                        </div>
+                    </form>
+                    <p class="alert">Le supplément de récupération est ajouté une seule fois au total.</p>
+                    <div class="border"></div>
+                    <div class="buttons">
+                        <button class="reset-button" id="return1">Précédent</button>
+                        <button class="next-button" id="next2">Suivant</button>
+                    </div>
+                </div>
+                <div class="choix-vehicule" id="etape3" hidden>
+                    
+                </div>
             </div>
             <div class="bill">
                 <p class="up-title">VOTRE LOCATION</p>
@@ -132,7 +197,7 @@
                 </div>
                 <div class="flex-it">
                     <p class="left">recuperation</p>
-                    <p class="right">gratuite</p>
+                    <p class="right" id="prix-recuperation">gratuite</p>
                 </div>
                 <div class="line"></div>
                 <div class="flex-it">

@@ -396,3 +396,25 @@ nav a[aria-current="page"] {
     background-color: #F4F6FA;
     padding: 10px;
 }
+.smaller{
+    height: 115px;
+}
+.local{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #D8E1EF;
+    padding-bottom: 15px;
+}
+.choisis1{
+    border: 3px solid #2852E3;
+    border-radius: 20px;
+    width: 248px;
+    height: 115px;  
+    padding: 10px;
+}
+.input1{
+    width: 768px;
+    height: 47px;
+    border-radius: 8px;
+    border: 1px solid #D8E1EF;
+}
