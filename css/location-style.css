@@ -418,3 +418,25 @@ nav a[aria-current="page"] {
     border-radius: 8px;
     border: 1px solid #D8E1EF;
 }
+.option{
+    border: 1px solid #D8E1EF;
+    border-radius: 20px;
+    padding: 10px;
+}
+.spacing{
+    row-gap: 10px;
+}
+.option-name{
+    font-size: 14px;
+    font-weight: 700;
+}
+.option-desc{
+    font-size: 14px;
+    font-weight: 400;
+    color: #697C94;
+}
+.checked{
+    border: 2px solid #2852E3;
+    border-radius: 20px;
+    padding: 10px;
+}

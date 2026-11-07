@@ -228,7 +228,7 @@ function calculprix(a, b) {
   prix = a * b
   if (prix > 0 && recup != null) {
     carprice.textContent = prix + "MAD / jour"
-    let totalprix = prix + recup
+    let totalprix = prix + recup + extras
     total.textContent = totalprix + "MAD"
   }
 }
@@ -377,4 +377,87 @@ next2.addEventListener("click", () => {
   } else {
     window.alert("please fill all fields")
   }
+})
+
+let bill = document.getElementById("bill-items")
+let option1 = document.getElementById("option1")
+let option2 = document.getElementById("option2")
+let return2 = document.getElementById("return2")
+let next3 = document.getElementById("next3")
+let case1 = document.getElementById("case1")
+let case2 = document.getElementById("case2")
+
+let extras = 0
+
+option1.addEventListener("click", () => {
+  if (option1.checked == true) {
+    case1.classList.add("checked")
+    case1.classList.remove("option")
+    addtobill()
+    calculprix(voitures[num].prixJour, duration)
+  } else if (option1.checked == false) {
+    case1.classList.add("option")
+    case1.classList.remove("checked")
+    addtobill()
+    calculprix(voitures[num].prixJour, duration)
+  }
+})
+
+option2.addEventListener("click", () => {
+  if (option2.checked == true) {
+    case2.classList.add("checked")
+    case2.classList.remove("option")
+    addtobill()
+    totalextra(option1,option2)
+    calculprix(voitures[num].prixJour, duration)
+  } else if (option2.checked == false) {
+    case2.classList.add("option")
+    case2.classList.remove("checked")
+    addtobill()
+    totalextra(option1,option2)
+    calculprix(voitures[num].prixJour, duration)
+  }
+})
+
+function totalextra(a, b) {
+  if (a.checked == true && b.checked == true) {
+    extras = 230
+  } else if (a.checked == true && b.checked == false) {
+    extras = 30
+  } else if (a.checked == false && b.checked == true) {
+    extras = 200
+  } else if (a.checked == false && b.checked == false) {
+    extras = 0
+  }
+}
+
+function addtobill() {  
+  let sible = document.querySelector('#sible')
+  if (sible) {
+    sible.remove()
+  }
+  let div1 = document.createElement("div")
+  let p = document.createElement("p")
+  let p1 = document.createElement("p")
+
+  div1.setAttribute("class", "flex-it")
+  div1.setAttribute("id", "sible")
+  p.setAttribute("class", "left")
+  p1.setAttribute("class", "right")
+
+  p.textContent = "extras"
+  totalextra(option1, option2)
+  p1.textContent = extras
+
+  div1.append(p, p1)
+  bill.append(div1)
+}
+
+return2.addEventListener("click", () => {
+  etape3.setAttribute("hidden", "true")
+  etape2.removeAttribute("hidden")
+  stepnum3.classList.remove("curent-step-num")
+  stepname3.classList.remove("curent-step-name")
+  stepnum2.classList.add("curent-step-num")
+  stepname2.classList.add("curent-step-name")
 })
