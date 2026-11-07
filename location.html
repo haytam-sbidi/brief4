@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>location</title>
+    <link rel="stylesheet" href="css/location-style.css" />
+    <script type="module" src="js/script.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="voitures.html" aria-label="AutoPark — Gestion du parc">
+                <span class="brand-mark" aria-hidden="true">A<span>.</span></span>
+                <span>AutoPark<small>ATLAS AUTO</small></span>
+            </a>
+            <nav aria-label="Navigation principale">
+                <!-- index.html est le dashboard à créer par l'apprenant. -->
+                <a href="index.html">Dashboard</a>
+                <a href="voitures.html">Gestion du parc</a>
+                <a href="location.html" aria-current="page">Ma location</a>
+            </nav>
+            <span class="agency-label">Agence de location</span>
+        </div>
+    </header>
+    <main class="container main-content">
+        <section>
+            <div>
+                <h5 class="eyebrow">VOTRE LOCATION SUR MESURE</h5>
+                <h2 class="title">Composez votre location</h2>
+                <h6 class="subtitle">Votre voiture, vos dates, vos options. À vous de choisir.</h6>
+            </div>
+            <div class="suivi">
+                <div class="etapes">
+                    <p class="num curent-step-num" id="stepnum1">1</p>
+                    <p class="name curent-step-name" id="stepname1">Véhicule</p>
+                </div>
+                <div class="etapes">
+                    <p class="num" id="stepnum2">2</p>
+                    <p class="name" id="stepname2">Récupération</p>
+                </div>
+                <div class="etapes">
+                    <p class="num" id="stepnum3">3</p>
+                    <p class="name" id="stepname3">Options</p>
+                </div>
+                <div class="etapes">
+                    <p class="num" id="stepnum4">4</p>
+                    <p class="name" id="stepname4">Récapitulatif</p>
+                </div>
+            </div>
+        </section>
+        <section class="selection">
+            <div class="steps">
+                <div class="choix-vehicule" id="etape1">*
+                    <div>
+                        <h6 class="up-title">01 / VÉHICULE</h6>
+                        <h2 class="sub-title">Choisissez votre véhicule</h2>
+                        <h5 class="thin">Sélectionnez une voiture disponible et votre période de location.</h5>
+                    </div>
+                    <form id="form1">
+                        <div class="present-voitures" id="affichage">
+                            <label for="voiture">
+                                <div class="choix choisis">
+                                    <div class="choix-top">
+                                        <h6 class="car-categorie">Citadine</h6>
+                                        <input type="radio" name="voiture" id="voiture" class="btn-choisis">
+                                    </div>
+                                    <h4 class="car-name">Dacia Sandero</h4>
+                                    <h6 class="car-statut">Disponible</h6>
+                                    <h4 class="car-price">250 MAD / jour</h4>
+                                </div>
+                            </label>
+                            <label for="voiture1">
+                                <div class="choix">
+                                    <div class="choix-top">
+                                        <h6 class="car-categorie">Citadine</h6>
+                                        <input type="radio" name="voiture" id="voiture1">
+                                    </div>
+                                    <h4 class="car-name">Dacia Sandero</h4>
+                                    <h6 class="car-statut">Disponible</h6>
+                                    <h4 class="car-price">250 MAD / jour</h4>
+                                </div>
+                            </label>
+                            <label for="voiture2">
+                                <div class="choix">
+                                    <div class="choix-top">
+                                        <h6 class="car-categorie">Citadine</h6>
+                                        <input type="radio" name="voiture" id="voiture2">
+                                    </div>
+                                    <h4 class="car-name">Dacia Sandero</h4>
+                                    <h6 class="car-statut">Disponible</h6>
+                                    <h4 class="car-price">250 MAD / jour</h4>
+                                </div>
+                            </label>
+                        </div>
+                        <p class="period">Votre période de location</p>
+                        <div>
+                            <div class="form">
+                                <div>
+                                    <label class="label">Date de début *</label><br><br>
+                                    <input type="date" class="input" id="date-debut"><br><br>
+                                </div>
+                                <div>
+                                    <label class="label">Date de fin *</label><br><br>
+                                    <input type="date" class="input" id="date-fin">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <p class="alert">Durée : 3 jours. Les dates de début et de fin sont incluses.</p>
+                    <div class="border"></div>
+                    <div class="buttons">
+                        <button class="reset-button" id="reset">Recommencer</button>
+                        <button class="next-button" id="next1">Suivant</button>
+                    </div>
+                </div>
+                <div class="choix-vehicule" id="etape2" hidden>
+                    <div>
+                        <h6 class="up-title">02 / RÉCUPÉRATION</h6>
+                        <h2 class="sub-title">Où récupérer votre voiture ?</h2>
+                        <h5 class="thin">Choisissez le lieu qui vous convient.</h5>
+                    </div>
+                    <form id="form2">
+                        <div class="local" id="affichage2">
+                            <label for="local1">
+                                <div class="choix smaller">
+                                    <input type="radio" name="local" id="local1">
+                                    <p class="car-name">À l’agence</p>
+                                    <p class="car-price">Gratuit</p>
+                                </div>
+                            </label>
+                        </div>
+                        <p class="period">Informations de récupération</p>
+                        <div id="recup-input">
+                            <div id="agence" hidden>
+                                <label class="label">Heure de récupération *</label><br><br>
+                                <input type="time" class="input1" id="time-input">
+                            </div>
+                            <div id="aeroport" hidden>
+                                <label class="label">Aéroport *</label><br><br>
+                                <select id="port" class="input1">
+                                    <option value="">select Aéroport</option>
+                                    <option value="Casablanca">Casablanca — Centre-ville</option>
+                                    <option value="Rabat">Rabat — Agdal</option>
+                                    <option value="Marrakech">Marrakech — Guéliz</option>
+                                </select><br><br>
+                                <div>
+                                    <div>
+                                        <label class="label">Numéro du vol *</label><br><br>
+                                        <input type="text" class="input" id="vol">
+                                    </div>
+                                    <div>
+                                        <label class="label">Heure d’arrivée *</label><br><br>
+                                        <input type="time" name="" id="arival" class="input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="adresse" hidden>
+                                <label for="" class="label">Ville *</label><br><br>
+                                <select name="" id="city" class="input1">
+                                    <option value="">choisir une ville</option>
+                                    <option value="Casablanca">Casablanca</option>
+                                    <option value="Rabat">Rabat</option>
+                                    <option value="Marrakech">Marrakech</option>
+                                </select><br><br>
+                                <label for="" class="label">Adresse complète *</label><br><br>
+                                <input type="text" class="input1" id="home"><br><br>
+                                <label for="" class="label">Heure de livraison *</label><br><br>
+                                <input type="time" class="input1" id="delivery">
+                            </div>
+                        </div>
+                    </form>
+                    <p class="alert">Le supplément de récupération est ajouté une seule fois au total.</p>
+                    <div class="border"></div>
+                    <div class="buttons">
+                        <button class="reset-button" id="return1">Précédent</button>
+                        <button class="next-button" id="next2">Suivant</button>
+                    </div>
+                </div>
+                <div class="choix-vehicule" id="etape3"hidden>
+                    <div>
+                        <h6 class="up-title">03 / OPTIONS</h6>
+                        <h2 class="sub-title">Les petits plus de votre location</h2>
+                        <h5 class="thin">Ces options sont facultatives et facturées par jour.</h5>
+                    </div>
+                    <form>
+                        <div class="spacing">
+                            <label>
+                                <div class="option" id="case1">
+                                    <input type="checkbox" id="option1">
+                                    <span class="option-name">Siège bébé</span>
+                                    <p class="option-desc">30 MAD / jour</p>
+                                </div>
+                            </label>
+                            <br>
+                            <label>
+                                <div class="option" id="case2">
+                                    <input type="checkbox" id="option2">
+                                    <span class="option-name">Conducteur supplémentaire</span>
+                                    <p class="option-desc">200 MAD / jour</p>
+                                </div>
+                            </label>
+                        </div>
+
+                    </form>
+                    <p class="alert">Vous pouvez sélectionner une, deux ou aucune option.</p>
+                    <div class="border"></div>
+                    <div class="buttons">
+                        <button class="reset-button" id="return2">Précédent</button>
+                        <button class="next-button" id="next3">Suivant</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bill">
+                <div id="bill-items">
+                    <p class="up-title">VOTRE LOCATION</p>
+                    <p class="sub-title" id="vehicule">Choisisez une vehicule</p>
+                    <p class="thin" id="vehicule-cat">categorie de vehicule</p>
+                    <div class="line"></div>
+                    <p class="time" id="period">période de location</p>
+                    <p class="duration" id="duree">Duréede location</p>
+                    <div class="flex-it">
+                        <p class="left">total de vos choix</p>
+                        <p class="right" id="prix-vehicule">prix</p>
+                    </div>
+                    <div class="flex-it">
+                        <p class="left">recuperation</p>
+                        <p class="right" id="prix-recuperation">gratuite</p>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="flex-it">
+                    <p class="total-left">Total estimé</p>
+                    <p class="total-right" id="total">total</p>
+                </div>
+                <p class="warning">Frais de récupération facturés une seule fois.</p>
+                <p class="warning back">Une demande, sans paiement en ligne.</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
